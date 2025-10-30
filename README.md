@@ -35,3 +35,11 @@ docker exec -it nginx-practice-nginx bash
 ls /usr/share/nginx/html
 
 cat /etc/nginx/nginx.conf
+
+//To see original nginx conf file command the copy command
+
+1. docker-compose down --rmi all
+2. docker-compose build --no-cache
+3. docker-compse up -d
+4. docker ps
+5. docker exec -it -d nginx
