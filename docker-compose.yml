@@ -1,26 +1,58 @@
+version: '3.9'
+
 services:
-  backend:
+  app1:
     build:
       context: ./backend
-      dockerfile: Dockerfile
-    container_name: backend
-    expose:
-      - '3000'
-    networks:
-      - app-network
-
-  nginx:
-    build:
-      context: .
-      dockerfile: ./nginx/Dockerfile
-    container_name: nginx
+    container_name: app1
     ports:
-      - '80:80'
-    depends_on:
-      - backend
-    networks:
-      - app-network
+      - '3001:3001' # Map host 3001 to container's 3000
+    environment:
+      - PORT=3001 # App listens on 3000 internally
 
-networks:
-  app-network:
-    driver: bridge
+  app2:
+    build:
+      context: ./backend
+    container_name: app2
+    ports:
+      - '3002:3002' # Map host 3002 to container's 3000
+    environment:
+      - PORT=3002
+
+  app3:
+    build:
+      context: ./backend
+    container_name: app3
+    ports:
+      - '3003:3003' # Map host 3003 to container's 3000
+    environment:
+      - PORT=3003
+
+  app4:
+    build:
+      context: ./backend
+    container_name: app4
+    ports:
+      - '3004:3004' # Map host 3004 to container's 3000
+    environment:
+      - PORT=3004
+
+    # expose:
+    #   - '3000'
+    # networks:
+    #   - app-network
+#   nginx:
+#     build:
+#       context: .
+#       dockerfile: ./nginx/Dockerfile
+#     container_name: nginx
+#     ports:
+#       - '80:80'
+#     depends_on:
+#       - backend
+#     networks:
+#       - app-network
+
+# networks:
+#   app-network:
+#     driver: bridge
